@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class NavBar {
+      init() {
+        console.log('navbar init');
+      }
+      getData() {
+        console.log('navbar getData');
+        return new Promise(resove => {
+          setTimeout(() => {
+            resove('navbar 11111111')
+          }, 1000)
+        })
+      }
+      render() {
+        console.log('navbar render');
+      }
+    }
+    class List {
+      init() {
+        console.log('list init');
+      }
+      getData() {
+        console.log('list getData');
+        return new Promise(resove => {
+          setTimeout(() => {
+            resove('list 11111111')
+          }, 1000)
+        })
+      }
+      render() {
+        console.log('list render');
+      }
+    }
+
+    class Operator {
+      async startBuild(builder) {
+        builder.init()
+        let data = await builder.getData()
+        console.log('操作data', data)
+        builder.render()
+      }
+    }
+
+    let op = new Operator()
+    op.startBuild(new NavBar())
+    op.startBuild(new List())
+
+
+  </script>
+</body>
+
+</html>

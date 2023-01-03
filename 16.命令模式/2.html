@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 组合模式 和命令 模式结合
+    // 宏命令
+
+    class MacroCommand {
+      constructor() {
+        this.list = []
+      }
+      add(command) {
+        this.list.push(command)
+      }
+      excute() {
+        for (const item of this.list) {
+          item.excute()
+        }
+      }
+    }
+
+    const swipe = {
+      excute() {
+        console.log('轮播执行了');
+        this.init()
+        this.render()
+      },
+      init() {
+        console.log('轮播初始化');
+      },
+      render() {
+        console.log('轮播渲染');
+      },
+    }
+    const tabs = {
+      excute() {
+        console.log('选项卡执行了');
+      }
+    }
+    const macroCommand = new MacroCommand()
+    macroCommand.add(swipe)
+    macroCommand.add(tabs)
+    macroCommand.excute()
+
+  </script>
+</body>
+
+</html>

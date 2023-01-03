@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Employee(name, age) {
+      this.name = name
+      this.age = age
+
+      // 公共的 每次new 都要重新生成开辟空间 --
+      this.say = function () {
+        console.log(this.name + '-', this.age);
+      }
+    }
+
+    let a = new Employee('ht', 80)
+    let b = new Employee('zw', 18)
+
+    console.log(a, b);
+    a.say()
+    b.say()
+
+
+
+  </script>
+</body>
+
+</html>

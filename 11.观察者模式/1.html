@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Subject {
+      constructor() {
+        this.observers = []
+      }
+      add(observer) {
+        this.observers.push(observer)
+      }
+
+      remove(observer) {
+        // splice filter
+        this.observers = this.observers.filter(item => item !== observer)
+      }
+      notify() {
+        this.observers.forEach(item => item.update())
+      }
+    }
+    class Observer {
+      constructor(name) {
+        this.name = name
+      }
+      update() {
+        console.log('更新了', this.name);
+      }
+    }
+
+    const subject = new Subject()
+    const o1 = new Observer('zzz')
+    const o2 = new Observer('hhh')
+    subject.add(o1)
+    subject.add(o2)
+
+    // subject.remove(o1)
+    // subject.remove(o2)
+    subject.notify()
+
+
+  </script>
+</body>
+
+</html>

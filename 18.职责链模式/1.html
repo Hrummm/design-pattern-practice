@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="ipt" />
+  <button id="btn">提交</button>
+  <script>
+
+    class Chain {
+      constructor(fn) {
+        this.checkRule = fn
+        this.nextRule = null
+      }
+      addRule(fn) {
+        this.nextRule = new Chain(fn)
+        return this.nextRule
+      }
+      check(value) {
+        // if (this.checkRule(value) === 'next') {
+        //   // this.nextRule && this.nextRule.check(value)
+        //   this.nextRule?.check(value)
+        // }
+
+        this.checkRule(value) === 'next' && this.nextRule?.check(value)
+      }
+    }
+    function checkEmpty(value) {
+      if (value.length === 0) {
+        console.log('不能为空！');
+        return
+      }
+      return 'next'
+    }
+    function checkNumber(value) {
+      if (isNaN(+value)) {
+        console.log('必须为数字');
+        return
+      }
+      return 'next'
+    }
+    function checkLegth(value) {
+      if (value.length < 6) {
+        console.log('长度不能小于6');
+        return
+      }
+      return 'next'
+    }
+    const a = new Chain(checkEmpty)
+    a.addRule(checkNumber).addRule(checkLegth)
+    btn.onclick = function () {
+      a.check(ipt.value)
+    }
+
+
+  </script>
+</body>
+
+</html>

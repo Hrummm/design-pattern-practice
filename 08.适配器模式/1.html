@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    class TxMap {
+      show() {
+        console.log('渲染腾讯地图')
+      }
+    }
+
+    class BdMap {
+      display() {
+        console.log('渲染百度地图');
+      }
+    }
+
+    // 适配器 磨平差异
+    class TxMapAdapter extends TxMap {
+      constructor() {
+        super()
+      }
+      display() {
+        this.show()
+      }
+    }
+
+    function renderMap(map) {
+      map.display()
+    }
+
+    renderMap(new TxMapAdapter())
+    renderMap(new BdMap())
+
+
+  </script>
+</body>
+
+</html>

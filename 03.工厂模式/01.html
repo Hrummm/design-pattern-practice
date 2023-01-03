@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 不同角色看到侧边栏的模块不一样
+     */
+    class User {
+      constructor(role, pages) {
+        this.role = role
+        this.pages = pages
+      }
+
+      static UserFactory(role) {
+        switch (role) {
+          case 'superadmin':
+            return new User(role, ['home', 'role-manage', 'permission-manage', 'news-manage'])
+            break;
+          case 'admin':
+            return new User(role, ['home', 'role-manage', 'news-manage'])
+            break;
+          case 'editor':
+            return new User(role, ['home', 'news-manage'])
+            break;
+          default:
+            throw Error('参数错误！')
+         }
+      }
+    }
+
+
+    let a = User.UserFactory("superadmin")
+    console.log(a);
+
+
+  </script>
+</body>
+
+</html>

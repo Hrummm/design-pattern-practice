@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class PubSub {
+      message = {}
+
+      publish(type, data) {
+        this.message[type]?.forEach(item => item(data)) 
+      }
+
+      subscribe(type, cb) {
+        if (!this.message[type]) {
+          this.message[type] = []
+        }
+        this.message[type].push(cb)
+      }
+      unsubscribe(type, cb) {
+        if (!this.message[type]) return
+        this.message[type] = this.message[type].filter(fcb => fcb !== cb)
+      }
+    }
+
+    function testA(data) {
+      console.log('testA', data);
+    }
+    function testB(data) {
+      console.log('testB', data);
+    }
+
+    const a = new PubSub()
+    a.subscribe('AAA', testA)
+    a.subscribe('AAA', testB)
+
+    a.publish('AAA', '999')
+    a.unsubscribe('AAA', testA)
+    a.publish('AAA', '888')
+
+  </script>
+</body>
+
+</html>

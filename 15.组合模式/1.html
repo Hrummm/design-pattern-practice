@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Floder {
+      list = []
+      constructor(floder) {
+        this.floder = floder
+      }
+
+      add(floder) {
+        this.list.push(floder)
+      }
+
+      scan() {
+        console.log('扫描文件夹', this.floder);
+        for (let i = 0, len = this.list.length; i < len; i++) {
+          const element = this.list[i];
+          element.scan()
+        }
+      }
+    }
+    class File {
+      constructor(file) {
+        this.file = file
+      }
+      scan() {
+        console.log('扫描文件', this.file);
+      }
+    }
+    const rootF = new Floder('root')
+    const htmltF = new Floder('html')
+    const cssF = new Floder('css')
+    const jsF = new Floder('js')
+    rootF.add(htmltF)
+    rootF.add(cssF)
+    rootF.add(jsF)
+    const css2 = new File('css2')
+    cssF.add(css2)
+    console.log(rootF.scan());
+
+  </script>
+</body>
+
+</html>

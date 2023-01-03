@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const obj = {
+      code: 200,
+      list: ['aaa', 'bbb', 'ccc'],
+      [Symbol.iterator]: function () {
+        let index = 0
+        return {
+          next: () => {
+            if (index < this.list.length) {
+              return {
+                done: false,
+                value: this.list[index++]
+              }
+            } else {
+              return {
+                done: true,
+                value: undefined
+              }
+            }
+          }
+        }
+      }
+    }
+    const o = obj[Symbol.iterator]()
+    console.log(o.next());
+    console.log(o.next());
+    console.log(o.next());
+    console.log(o.next());
+
+    for (const iterator of obj) {
+      console.log(iterator);
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

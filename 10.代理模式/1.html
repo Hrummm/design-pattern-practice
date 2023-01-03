@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    class Star {
+      play() {
+        console.log("演戏了");
+      }
+    }
+
+    class StarProxy {
+      constructor() {
+        this.star = new Star()
+      }
+      talk(price) {
+        if (price > 10000) {
+          this.star.play()
+        } else {
+          throw new Error('价格不合适')
+        }
+      }
+    }
+
+    const jr = new StarProxy()
+    jr.talk(100000)
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .app {
+      display: flex;
+      height: 500px;
+    }
+
+    .left {
+      width: 150px;
+      background-color: skyblue;
+    }
+
+    .right {
+      flex: 1;
+      background-color: yellowgreen;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <div class="left">
+      <ul>
+        <li>首页</li>
+        <li>权限管理</li>
+        <li>角色管理</li>
+      </ul>
+    </div>
+
+    <div class="right">
+      <div class="breadCrumb">首页</div>
+
+    </div>
+  </div>
+
+  <script>
+    class Subject {
+      constructor() {
+        this.observers = []
+      }
+      add(observer) {
+        this.observers.push(observer)
+      }
+
+      remove(observer) {
+        this.observers = this.observers.filter(item => item !== observer)
+      }
+      notify(value) {
+        this.observers.forEach(item => item.update(value))
+      }
+    }
+
+    class Observer {
+      constructor(selector) {
+        this.dom = document.querySelector(selector)
+      }
+      update(value) {
+        this.dom.innerHTML = value
+      }
+    }
+
+    const observer = new Observer('.breadCrumb')
+    const subject = new Subject()
+    subject.add(observer)
+    document.querySelectorAll('.left ul li').forEach(dom => {
+      dom.onclick = function () {
+        subject.notify(this.innerHTML)
+      }
+    })
+
+  </script>
+</body>
+
+</html>

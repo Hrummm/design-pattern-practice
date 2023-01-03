@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const strategy = {
+      "A": (salary) => {
+        return salary * 4
+      },
+      "B": (salary) => {
+        return salary * 3
+      },
+      "C": (salary) => {
+        return salary * 2
+      },
+      // 扩展S级
+      "S": (salary) => {
+        return salary * 6
+      },
+    }
+
+
+    function calcBonus(level, salary) {
+      if (typeof salary !== "number") {
+        throw new Error('参数有误！')
+      }
+      if (strategy[level] === undefined) return salary
+      return strategy[level](salary)
+    }
+
+    calcBonus('A', 10)
+
+
+
+  </script>
+
+</body>
+
+</html>

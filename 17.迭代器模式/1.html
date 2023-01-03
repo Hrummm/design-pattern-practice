@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=e dge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul id="app"></ul>
+  <script>
+    function myEach(arr, cb) {
+      for (let i = 0; i < arr.length; i++) {
+        cb(i, arr[i])
+      }
+    }
+
+    myEach([11, 22, 33, 44], function (key, value) {
+      const dom = document.createElement('li')
+      dom.innerHTML = key + '-' + value
+      app.appendChild(dom)
+    })
+
+    // 对象添加迭代器对象
+    const obj = {
+      0: 'zzz',
+      1: 'hhh',
+      2: 'ttt',
+      length: 3,
+      [Symbol.iterator]: Array.prototype[Symbol.iterator]
+    }
+
+    for (const iterator of obj) {
+      console.log(iterator);
+    }
+
+  </script>
+</body>
+
+</html>
